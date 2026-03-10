@@ -15,26 +15,26 @@
 /* 启动任务相关配置 */
 void startTask(void *args);
 #define START_TASK_NAME "start"
-#define START_TASK_STACK_DEPTH 256
+#define START_TASK_STACK_DEPTH 128
 #define START_TASK_PRIORITY 1
 TaskHandle_t startTaskTCB;
 
 /* OLED显示任务 */
 #define OLED_TASK_NAME "OLED_Display"
-#define OLED_TASK_STACK_DEPTH 256
+#define OLED_TASK_STACK_DEPTH 192
 #define OLED_TASK_PRIORITY 2
 TaskHandle_t oledTaskTCB;
 
 /* RFID录入任务 */
 void RFID_Task(void *args);
 #define RFID_TASK_NAME "RFID_Scan"
-#define RFID_TASK_STACK_DEPTH 256
+#define RFID_TASK_STACK_DEPTH 224
 #define RFID_TASK_PRIORITY 3
 TaskHandle_t rfidTaskTCB;
 
 void Transport_Task(void *args);
 #define TRANSPORT_TASK_NAME "Transport"
-#define TRANSPORT_TASK_STACK_DEPTH 256
+#define TRANSPORT_TASK_STACK_DEPTH 224
 #define TRANSPORT_TASK_PRIORITY 2
 TaskHandle_t transportTaskTCB;
 

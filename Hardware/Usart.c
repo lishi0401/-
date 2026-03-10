@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <string.h>
 
-#define USART2_RX_BUFFER_SIZE 256
+#define USART2_RX_BUFFER_SIZE 128
 
 static uint8_t Usart2_RxData = 0;
 static uint8_t Usart2_RxFlag = 0;

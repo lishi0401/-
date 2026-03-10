@@ -14,9 +14,9 @@ static unsigned char mn316_rx_buf[MN316_RX_MAX];
 static unsigned short mn316_cnt = 0;
 static unsigned short mn316_cntPre = 0;
 
-static char mn316_cmd_buf[768];
-static char mn316_topic_buf[128];
-static char mn316_payload_buf[512];
+static char mn316_cmd_buf[320];
+static char mn316_topic_buf[64];
+static char mn316_payload_buf[128];
 
 uint8_t ESP8266_INIT_OK = 0;
 
@@ -155,10 +155,10 @@ void MN316_SendData(unsigned char *data, unsigned short len)
 	qos = (data[0] & 0x06) >> 1;
 
 	topic_len = ((unsigned short)data[vh_start] << 8) | data[vh_start + 1];
-	if(topic_len == 0 || topic_len > 127) return;
+	if(topic_len == 0 || topic_len > 63) return;
 	if(vh_start + 2 + topic_len > len) return;
 
-	for(i = 0; i < topic_len && i < 127; i++)
+	for(i = 0; i < topic_len && i < 63; i++)
 	{
 		mn316_topic_buf[i] = data[vh_start + 2 + i];
 	}
@@ -173,11 +173,11 @@ void MN316_SendData(unsigned char *data, unsigned short len)
 	if(payload_start > len) return;
 
 	payload_len = len - payload_start;
-	if(payload_len > 511) payload_len = 511;
+	if(payload_len > 127) payload_len = 127;
 
 	{
 		unsigned short j = 0;
-		for(i = 0; i < payload_len && j < 500; i++)
+		for(i = 0; i < payload_len && j < 120; i++)
 		{
 			unsigned char c = data[payload_start + i];
 			if(c >= 32 && c < 127 && c != '"' && c != '\\')
@@ -229,7 +229,7 @@ unsigned char *MN316_GetIPD(unsigned short timeOut)
 					char *json_end = strrchr(json_start, '}');
 					if(json_end != NULL)
 					{
-						static char temp_json[512];
+						static char temp_json[128];
 						int json_len = json_end - json_start + 1;
 						if(json_len < sizeof(temp_json))
 						{

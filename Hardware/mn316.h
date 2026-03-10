@@ -6,7 +6,7 @@
 #define REV_OK		0
 #define REV_WAIT	1
 
-#define MN316_RX_MAX	1024
+#define MN316_RX_MAX	256
 
 #define MN316_USART		USART2
 #define MN316_BAUDRATE	9600
