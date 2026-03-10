@@ -86,7 +86,7 @@ typedef struct {
     uint8_t page_changed;
 } System_State_t;
 
-extern System_State_t g_system_state;
+extern volatile System_State_t g_system_state;
 
 void System_State_Init(void);
 void System_State_SetPage(OLED_Page_t page);

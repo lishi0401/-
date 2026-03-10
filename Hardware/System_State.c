@@ -1,7 +1,7 @@
 #include "System_State.h"
 #include <string.h>
 
-System_State_t g_system_state;
+volatile System_State_t g_system_state;
 
 static void System_State_SaveWarehouse(uint8_t index, uint8_t warehouse)
 {
